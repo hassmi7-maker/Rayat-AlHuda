@@ -10,40 +10,38 @@
             background-color: #1a1a1a;
             color: #f4f4f4;
             margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* الترويسة: تصميم مرن لضمان التوسيط وظهور الشعار */
         .site-header {
             width: 100%;
             background-color: #262626;
             border-bottom: 2px solid #d4af37;
-            padding: 15px 0;
+            padding: 20px 0;
             display: flex;
-            flex-direction: column; /* عمودي للجوال */
+            flex-direction: column; 
             align-items: center;
             justify-content: center;
             text-align: center;
-            gap: 10px;
+            gap: 15px;
         }
 
+        /* تعديل لضمان عدم اختفاء الشعار */
         .site-logo {
-            width: 90px; /* حجم واضح للشعار */
+            width: 100px;
             height: auto;
-            display: block;
-            margin: 0 auto;
+            max-width: 80%;
+            display: block !important;
         }
 
         .site-title {
             color: #d4af37;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin: 0;
-            padding: 0 10px;
             font-weight: bold;
-            line-height: 1.4;
+            padding: 0 15px;
         }
 
         .main-wrapper {
@@ -56,19 +54,18 @@
 
         .modal-content {
             background-color: #262626;
-            padding: 35px 25px;
+            padding: 40px 20px;
             border-radius: 20px;
             border: 1px solid #d4af37;
             text-align: center;
             width: 100%;
-            max-width: 320px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            max-width: 350px;
         }
 
         .btn-container {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 15px;
         }
 
         .choice-btn {
@@ -80,31 +77,20 @@
             border: none;
             border-radius: 12px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
         }
 
-        .choice-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* تعديلات الكمبيوتر */
         @media (min-width: 768px) {
-            .site-header {
-                flex-direction: row; /* أفقي للكمبيوتر */
-                padding: 25px 0;
-                gap: 20px;
-            }
+            .site-header { flex-direction: row; gap: 20px; }
             .site-title { font-size: 2.5rem; }
-            .site-logo { width: 110px; }
         }
 
-        .main-content { display: none; text-align: center; }
+        .main-content { display: none; text-align: center; padding: 40px; }
     </style>
 </head>
 <body>
 
     <header class="site-header">
-        <img src="m-logo.png" alt="شعار الموكب" class="site-logo">
+        <img src="m-logo.png" alt="شعار الموكب" class="site-logo" onerror="this.src='logo.png'">
         <h1 class="site-title">موكب راية الهدى بالجارودية</h1>
     </header>
 
@@ -118,7 +104,6 @@
 
         <div id="mainContent" class="main-content">
             <h2 style="color: #d4af37; font-size: 2.5rem;">قسم <span id="sectionName"></span></h2>
-            <p>مرحباً بكم في موكب راية الهدى</p>
         </div>
     </div>
 
