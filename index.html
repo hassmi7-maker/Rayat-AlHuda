@@ -15,33 +15,21 @@
             min-height: 100vh;
         }
 
-        /* الترويسة: جعل العنوان قابل للضغط */
         .site-header {
             width: 100%;
             background-color: #262626;
             border-bottom: 2px solid #d4af37;
-            padding: 20px 0;
+            padding: 15px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            gap: 10px;
-            cursor: pointer; /* يظهر شكل اليد عند التأشير */
+            cursor: pointer;
         }
 
-        .site-logo {
-            width: 100px;
-            height: auto;
-        }
-
-        .site-title {
-            color: #d4af37;
-            font-size: 1.8rem;
-            margin: 0;
-            font-weight: bold;
-            padding: 0 15px;
-        }
+        .site-logo { width: 90px; height: auto; }
+        .site-title { color: #d4af37; font-size: 1.6rem; margin: 0; font-weight: bold; }
 
         .main-wrapper {
             flex: 1;
@@ -53,20 +41,15 @@
 
         .modal-content {
             background-color: #262626;
-            padding: 40px 20px;
+            padding: 30px;
             border-radius: 20px;
             border: 1px solid #d4af37;
             text-align: center;
             width: 100%;
             max-width: 350px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        .btn-container { display: flex; flex-direction: column; gap: 15px; }
 
         .choice-btn {
             padding: 16px;
@@ -77,46 +60,56 @@
             border: none;
             border-radius: 12px;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        /* تنسيق قسم المحتوى الداخلي */
-        .main-content {
-            display: none;
-            text-align: center;
-            padding: 40px;
+        /* تنسيق الجدول */
+        .main-content { display: none; text-align: center; width: 100%; max-width: 600px; }
+        
+        table {
             width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #262626;
+            border: 1px solid #d4af37;
         }
 
-        /* زر العودة للخلف داخل القسم */
+        th, td {
+            border: 1px solid #444;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th { background-color: #333; color: #d4af37; }
+
+        select {
+            padding: 8px;
+            background-color: #1a1a1a;
+            color: #f4f4f4;
+            border: 1px solid #d4af37;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
         .back-btn {
             margin-top: 30px;
-            padding: 10px 25px;
+            padding: 10px 20px;
             background-color: transparent;
             color: #d4af37;
             border: 1px solid #d4af37;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        .back-btn:hover {
-            background-color: #d4af37;
-            color: #1a1a1a;
         }
 
         @media (min-width: 768px) {
-            .site-header { flex-direction: row; gap: 25px; padding: 30px 0; }
-            .site-title { font-size: 2.5rem; }
-            .site-logo { width: 120px; }
+            .site-header { flex-direction: row; gap: 20px; }
+            .site-title { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
     <header class="site-header" onclick="goHome()">
-        <img src="m-logo.png" alt="شعار الموكب" class="site-logo" onerror="this.src='m-logo'">
+        <img src="m-logo.png" alt="شعار" class="site-logo" onerror="this.src='m-logo'">
         <h1 class="site-title">موكب راية الهدى بالجارودية</h1>
     </header>
 
@@ -129,24 +122,52 @@
         </div>
 
         <div id="mainContent" class="main-content">
-            <h2 style="color: #d4af37; font-size: 2.5rem;">قسم <span id="sectionName"></span></h2>
-            <p>خِدّمة أهل البيت عليهم السلام - الجارودية</p>
+            <h2 style="color: #d4af37; font-size: 2rem;">قسم <span id="sectionName"></span></h2>
             
+            <div id="tableContainer">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التاريخ (ميلادي)</th>
+                            <th>التحضير بواسطة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="currentDate">-- / -- / ----</td>
+                            <td>
+                                <select>
+                                    <option value="">اختر الاسم...</option>
+                                    <option>نادر المعراج</option>
+                                    <option>عباس المعلم</option>
+                                    <option>حسن المعراج</option>
+                                    <option>سيد محمد نوري</option>
+                                    <option>حسن الرمضان</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <button class="back-btn" onclick="goHome()">⬅ العودة للرئيسية</button>
         </div>
     </div>
 
     <script>
-        // دالة اختيار القسم
         function selectSection(name) {
             document.getElementById('welcomeModal').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
             document.getElementById('sectionName').innerText = name;
-            // رفع الصفحة للأعلى عند الانتقال
-            window.scrollTo(0, 0);
+            
+            // تحديث التاريخ تلقائياً عند الدخول
+            if(name === 'مهدويون') {
+                const today = new Date();
+                const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                document.getElementById('currentDate').innerText = today.toLocaleDateString('en-GB', options);
+            }
         }
 
-        // دالة العودة لصفحة البداية
         function goHome() {
             document.getElementById('mainContent').style.display = 'none';
             document.getElementById('welcomeModal').style.display = 'block';
