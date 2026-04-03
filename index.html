@@ -7,26 +7,44 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a;
+            background-color: #1a1a1a; /* خلفية داكنة راقية */
             color: #f4f4f4;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        /* الترويسة العليا - خارج المربع */
         .site-header {
             width: 100%;
-            padding: 20px 0;
+            padding: 25px 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             background-color: #262626;
-            border-bottom: 2px solid #d4af37;
+            border-bottom: 2px solid #d4af37; /* خط ذهبي أسفل الترويسة */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        .site-logo { width: 60px; height: auto; }
-        .site-title { color: #d4af37; font-size: 1.8rem; margin: 0; }
+
+        .site-logo {
+            width: 80px; /* حجم الشعار */
+            height: auto;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+        }
+
+        .site-title {
+            color: #d4af37;
+            font-size: 2.2rem;
+            margin: 0;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* منطقة النافذة المنبثقة في منتصف الصفحة */
         .modal-container {
             flex-grow: 1;
             display: flex;
@@ -34,39 +52,67 @@
             align-items: center;
             width: 100%;
         }
+
         .modal-content {
             background-color: #262626;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px;
+            border-radius: 20px;
             border: 1px solid #d4af37;
             text-align: center;
-            width: 85%;
-            max-width: 350px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+            max-width: 400px;
+            width: 90%;
         }
-        .btn-container { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+
+        .modal-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
         .choice-btn {
-            padding: 12px;
-            font-size: 1.1rem;
+            padding: 18px;
+            font-size: 1.4rem;
             font-weight: bold;
             color: #1a1a1a;
             background-color: #d4af37;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .main-content { display: none; padding: 40px; text-align: center; }
+
+        .choice-btn:hover {
+            background-color: #f1c40f;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* المحتوى الذي يظهر بعد الاختيار */
+        .main-content {
+            display: none;
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
 
     <header class="site-header">
-        <img src="logo.png" alt="شعار الموكب" class="site-logo">
+        <img src="m-logo.png" alt="شعار الموكب" class="site-logo">
         <h1 class="site-title">موكب راية الهدى بالجارودية</h1>
     </header>
 
     <div id="welcomeModal" class="modal-container">
         <div class="modal-content">
-            <p style="font-size: 1.1rem;">يرجى اختيار القسم المخصص لكم:</p>
+            <p>يرجى اختيار القسم المخصص لكم:</p>
             <div class="btn-container">
                 <button class="choice-btn" onclick="selectSection('مهدويون')">مهدويون</button>
                 <button class="choice-btn" onclick="selectSection('أشبال الراية')">أشبال الراية</button>
@@ -75,16 +121,20 @@
     </div>
 
     <div id="mainContent" class="main-content">
-        <h2 style="color: #d4af37;">أهلاً بك في قسم <span id="sectionName"></span></h2>
-        <p>خِدّمة أهل البيت عليهم السلام - الجارودية</p>
+        <h2 style="color: #d4af37; font-size: 2.8rem;">أهلاً بك في قسم <span id="sectionName"></span></h2>
+        <p style="font-size: 1.2rem;">خِدّمة أهل البيت عليهم السلام - الجارودية</p>
     </div>
 
     <script>
         function selectSection(name) {
+            // إخفاء النافذة المنبثقة
             document.getElementById('welcomeModal').style.display = 'none';
+            // إظهار المحتوى الرئيسي
             document.getElementById('mainContent').style.display = 'block';
+            // تحديث اسم القسم
             document.getElementById('sectionName').innerText = name;
         }
     </script>
+
 </body>
 </html>
